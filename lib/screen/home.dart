@@ -22,46 +22,17 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late final SwipableStackController _controller;
 
-  void _listenController() => setState(() {
-        //getData();
-      });
+  void _listenController() => setState(() {});
 
   @override
   void initState() {
     super.initState();
-    getData();
     _controller = SwipableStackController()..addListener(_listenController);
   }
 
   List imageAll = [];
   List indexAll = [];
   List titleAll = [];
-  Future getData() async {
-    print(imageAll);
-    Response response =
-        await get(Uri.parse("https://fakestoreapi.com/products"));
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      List data = jsonDecode(response.body);
-
-      //ADD Following lines to your code.
-
-      for (int i = 0; i < data.length; i++) {
-        setState(() {
-          imageAll.add(data[i]["image"].toString());
-          indexAll.add(data[i]["id"].toString());
-          titleAll.add(data[i]["title"].toString());
-        });
-      }
-      if (kDebugMode) {
-        print(imageAll);
-      }
-    } else {
-      if (kDebugMode) {
-        print("Failed");
-      }
-    }
-  }
 
   @override
   void dispose() {
